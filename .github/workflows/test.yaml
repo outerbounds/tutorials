@@ -11,11 +11,17 @@ jobs:
         with:
           python-version: '3.10'
           architecture: 'x64'
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: "full-stack-metaflow"
+          python-version: 3.10
+          mamba-version: "*"
+          channels: conda-forge
+          environment-file: env.yml
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install git+https://github.com/fastai/nbprocess.git@master
-          pip install -qe ".[dev]"       
       - name: Check if all notebooks are cleaned
         run: |
           echo "Check we are starting with clean git checkout"
