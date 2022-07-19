@@ -81,9 +81,11 @@ class MyFlow(FlowSpec):
         "If model beats the baseline and passes smoke tests, then retrain the model on all available data."
         if self.beats_baseline and self.passed_smoke_test:
             from sklearn.feature_extraction.text import CountVectorizer
+            from tensorflow.keras.utils import set_random_seed
             import pandas as pd
             from model import get_model
-
+            
+            set_random_seed(2022)
             all_df = pd.concat([self.train_df, self.holdout_df])
             res = self.cv.transform(all_df['review'])
             self.final_model = get_model(len(self.cv.vocabulary_))
