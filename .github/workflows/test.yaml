@@ -8,12 +8,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        os: ["ubuntu-latest", "macos-latest"]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
-        with:
-          python-version: "3.8"
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: "full-stack-metaflow"
@@ -23,7 +20,10 @@ jobs:
           environment-file: env.yml
       - name: Install Dependencies
         run: |
+          conda activate full-stack-metaflow
           python -m pip install --upgrade pip
           python -m pip install git+https://github.com/fastai/nbprocess.git@master
       - name: Test Notebooks
-        run: nbprocess_test
+        run: |
+          conda activate full-stack-metaflow
+          nbprocess_test
