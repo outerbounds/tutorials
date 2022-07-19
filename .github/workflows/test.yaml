@@ -11,9 +11,6 @@ jobs:
         os: ["ubuntu-latest", "macos-latest"]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
-        with:
-          python-version: "3.8"
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: "full-stack-metaflow"
