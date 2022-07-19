@@ -20,7 +20,10 @@ jobs:
           environment-file: env.yml
       - name: Install Dependencies
         run: |
+          conda activate full-stack-metaflow
           python -m pip install --upgrade pip
           python -m pip install git+https://github.com/fastai/nbprocess.git@master
       - name: Test Notebooks
-        run: nbprocess_test
+        run: |
+          conda activate full-stack-metaflow
+          nbprocess_test
