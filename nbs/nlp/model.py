@@ -4,7 +4,7 @@ from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.metrics import accuracy_score, roc_auc_score
 from sklearn.feature_extraction.text import CountVectorizer
 
-class Nbow_Model():
+class NbowModel():
     def __init__(self, vocab_sz):
         self.vocab_sz = vocab_sz
         # Instantiate the CountVectorizer
