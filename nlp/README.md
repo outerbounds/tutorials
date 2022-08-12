@@ -6,11 +6,11 @@ Welcome to the GitHub repo that supports the [NLP with Metaflow tutorial]()!  Th
 
 To run the tutorial, you need to install the required depdendencies via conda. We have included a conda environment in the form of a [env.yml](./env.ml) file for you to use.  You can install the environemnent via the following command:
 
-> We are using `mamba` instead of `conda` because it is 
+> We are using `mamba` instead of `conda` because it is significantly faster. However you can use `conda` if you want to.
 
 ```bash
 mamba env create -f env.yml
-mamba activate mf-tutorial-nlp
+conda activate mf-tutorial-nlp
 ```
 
 ## Running the Tutorial
