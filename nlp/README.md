@@ -13,22 +13,24 @@ mamba env create -f env.yml
 conda activate mf-tutorial-nlp
 ```
 
-## Running the Tutorial
+## Running the Tutorials
+
+Please follow along with the appropriate [lesson page](https://outerbounds.com/docs/nlp-tutorial-overview)
 
 1. Lesson 1: Building The Model
-    - [Tutorial page]()
+    - [Tutorial page](https://outerbounds.com/docs/nlp-tutorial-L1)
     - [Notebook](nlp-1.ipynb)
 2. Lesson 2: Creating A Baseline Flow
-    - [Tutorial page]()
+    - [Tutorial page](https://outerbounds.com/docs/nlp-tutorial-L2)
     - [baselineflow.py](baselineflow.py)
 3. Lesson 3: Branching & Training The Model
-   - [Tutorial page]()
+   - [Tutorial page](https://outerbounds.com/docs/nlp-tutorial-L3)
    - [branchflow.py](branchflow.py)
 4. Lesson 4: Tagging & Model Evaluation
-   - [Tutorial page]()
+   - [Tutorial page](https://outerbounds.com/docs/nlp-tutorial-L4)
    - [nlpflow.py](nlpflow.py)
 5. Lesson 5: Using & Retrieving Your Model
-   - [Tutorial page]()
+   - [Tutorial page](https://outerbounds.com/docs/nlp-tutorial-L5)
    - [Notebook](nlp-5.ipynb)
    - [predflow.py](predflow.py)
 
