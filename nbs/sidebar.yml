@@ -1,7 +1,0 @@
-website:
-  sidebar:
-    contents:
-      - index.ipynb
-      - section: nlp
-        contents:
-          - nlp/04_NBow.ipynb
