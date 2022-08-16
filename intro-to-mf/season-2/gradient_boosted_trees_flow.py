@@ -32,9 +32,9 @@ class GradientBoostedTreesFlow(FlowSpec):
     def end(self):
         import numpy as np
         msg = "Gradient Boosted Trees Model Accuracy: {} \u00B1 {}%"
-        print(msg.format(
-            round(100*np.mean(self.scores), 3),
-            round(100*np.std(self.scores), 3)))
+        self.mean = round(100*np.mean(self.scores), 3)
+        self.std = round(100*np.std(self.scores), 3)
+        print(msg.format(self.mean, self.std))
 
 if __name__ == "__main__":
     GradientBoostedTreesFlow()

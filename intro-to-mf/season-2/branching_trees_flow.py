@@ -57,9 +57,11 @@ class ParallelTreesFlow(FlowSpec):
 
     @step
     def end(self):
-        for name, acc, std in self.scores:
+        self.experiment_results = []
+        for name, mean, std in self.scores:
+            self.experiment_results.append((name,mean,std))
             msg = "{} Model Accuracy: {} \u00B1 {}%"
-            print(msg.format(name, round(acc, 3), round(std, 3)))
+            print(msg.format(name, round(mean, 3), round(std, 3)))
         
 if __name__ == "__main__":
     ParallelTreesFlow()
