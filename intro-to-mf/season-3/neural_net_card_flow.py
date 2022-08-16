@@ -1,7 +1,7 @@
 from metaflow import FlowSpec, step, card, current
 from metaflow.cards import Image
 
-def get_plots(history):
+def plot_learning_curves(history):
     import matplotlib.pyplot as plt
     fig1, ax = plt.subplots(1,1)
     ax.plot(history.history['accuracy'])
@@ -72,7 +72,7 @@ class NeuralNetCardFlow(FlowSpec):
         history = self.model.fit(self.x_train, self.y_train, 
                   batch_size=self.batch_size, 
                   epochs=self.epochs, validation_split=0.1)
-        fig_acc, fig_loss = get_plots(history)
+        fig_acc, fig_loss = plot_learning_curves(history)
         current.card.append(Image.from_matplotlib(fig_acc))
         current.card.append(Image.from_matplotlib(fig_loss))
         self.next(self.end)

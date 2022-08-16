@@ -1,22 +1,4 @@
-from metaflow import FlowSpec, step, card, current
-from metaflow.cards import Image
-
-def get_plots(history):
-    fig1, ax = plt.subplots(1,1)
-    ax.plot(history.history['accuracy'])
-    ax.plot(history.history['val_accuracy'])
-    ax.set_title('model accuracy')
-    ax.set_ylabel('accuracy')
-    ax.set_xlabel('epoch')
-    fig1.legend(['train', 'test'], loc='upper left')
-    fig2, ax = plt.subplots(1,1)
-    ax.plot(history.history['loss'])
-    ax.plot(history.history['val_loss'])
-    ax.set_title('model loss')
-    ax.set_ylabel('loss')
-    ax.set_xlabel('epoch')
-    fig2.legend(['train', 'test'], loc='upper left')
-    return fig1, fig2
+from metaflow import FlowSpec, step
 
 class NeuralNetFlow(FlowSpec):
 
@@ -61,19 +43,15 @@ class NeuralNetFlow(FlowSpec):
                            optimizer="adam", metrics=["accuracy"])
         self.next(self.train)
 
-    @card
     @step
     def train(self):
         import tempfile
         import tensorflow as tf
         self.batch_size = 128
-        self.epochs = 2
-        history = self.model.fit(self.x_train, self.y_train, 
+        self.epochs = 15
+        self.model.fit(self.x_train, self.y_train, 
                   batch_size=self.batch_size, 
                   epochs=self.epochs, validation_split=0.1)
-        fig_acc, fig_loss = get_plots(history)
-        current.card.append(Image.from_matplotlib(fig_acc))
-        current.card.append(Image.from_matplotlib(fig_loss))
         self.next(self.end)
 
     @step

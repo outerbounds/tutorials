@@ -14,7 +14,8 @@ class DebuggableFlow(FlowSpec):
         
     @step
     def error_prone_step(self):
-        print("Squashed bug")
+        #highlight-next-line
+        raise Exception()
         self.next(self.end)
     
     @step
