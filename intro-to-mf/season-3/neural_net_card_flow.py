@@ -1,4 +1,4 @@
-from metaflow import FlowSpec, step, card, current
+from metaflow import FlowSpec, step, card, current, Parameter
 from metaflow.cards import Image
 
 def plot_learning_curves(history):
@@ -20,6 +20,8 @@ def plot_learning_curves(history):
     return fig1, fig2
 
 class NeuralNetCardFlow(FlowSpec):
+    
+    epochs = Parameter('e', default=10)
 
     @step
     def start(self):
@@ -68,7 +70,6 @@ class NeuralNetCardFlow(FlowSpec):
         import tempfile
         import tensorflow as tf
         self.batch_size = 128
-        self.epochs = 15
         history = self.model.fit(self.x_train, self.y_train, 
                   batch_size=self.batch_size, 
                   epochs=self.epochs, validation_split=0.1)

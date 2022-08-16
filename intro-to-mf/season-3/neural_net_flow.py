@@ -1,6 +1,8 @@
-from metaflow import FlowSpec, step
+from metaflow import FlowSpec, step, Parameter
 
 class NeuralNetFlow(FlowSpec):
+    
+    epochs = Parameter('e', default=10)
 
     @step
     def start(self):
@@ -48,7 +50,6 @@ class NeuralNetFlow(FlowSpec):
         import tempfile
         import tensorflow as tf
         self.batch_size = 128
-        self.epochs = 15
         self.model.fit(self.x_train, self.y_train, 
                   batch_size=self.batch_size, 
                   epochs=self.epochs, validation_split=0.1)
