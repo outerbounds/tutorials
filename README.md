@@ -8,3 +8,6 @@ The tutorials in this repository will teach you how to represent machine learnin
 Join us on [Slack](http://slack.outerbounds.co/) and let us know how we can support your machine learning journey.
 
 Please consider sharing any cool stuff you build on top of these tutorials!
+
+# Setup
+To configure your environment to run these tutorials, please see the instructions [here](outerbounds.com/docs/intro-tutorial-setup).
