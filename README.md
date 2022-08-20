@@ -10,4 +10,4 @@ Join us on [Slack](http://slack.outerbounds.co/) and let us know how we can supp
 Please consider sharing any cool stuff you build on top of these tutorials!
 
 # Setup
-To configure your environment to run these tutorials, please see the instructions [here](outerbounds.com/docs/intro-tutorial-setup).
+To configure your environment to run these tutorials, please see the instructions [here](https://outerbounds.com/docs/intro-tutorial-setup).
