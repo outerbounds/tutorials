@@ -15,6 +15,7 @@ class ParallelTreesFlow(FlowSpec):
         self.iris = datasets.load_iris()
         self.X = self.iris['data']
         self.y = self.iris['target']
+        #highlight-next-line
         self.next(self.train_rf, self.train_xgb)
 
     @step
@@ -29,6 +30,7 @@ class ParallelTreesFlow(FlowSpec):
         self.model_name = "Random Forest"
         self.scores = cross_val_score(
             self.clf, self.X, self.y, cv=self.k_fold)
+        #highlight-next-line
         self.next(self.score)
 
     @step
@@ -44,13 +46,16 @@ class ParallelTreesFlow(FlowSpec):
         self.model_name = "XGBoost"
         self.scores = cross_val_score(
             self.clf, self.X, self.y, cv=self.k_fold)
+        #highlight-next-line
         self.next(self.score)
 
     @step
     def score(self, modeling_tasks):
         import numpy as np
         self.scores = [
-            (model.model_name, np.mean(model.scores), np.std(model.scores))
+            (model.model_name, 
+             np.mean(model.scores), 
+             np.std(model.scores))
             for model in modeling_tasks
         ]
         self.next(self.end)

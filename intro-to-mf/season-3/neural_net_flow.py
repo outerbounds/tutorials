@@ -9,7 +9,6 @@ class NeuralNetFlow(FlowSpec):
         import numpy as np
         from tensorflow import keras
         self.num_classes = 10
-        self.input_shape = (28,28,1)
         ((x_train, y_train), 
          (x_test, y_test)) = keras.datasets.mnist.load_data()
         x_train = x_train.astype("float32") / 255
@@ -30,7 +29,7 @@ class NeuralNetFlow(FlowSpec):
         from tensorflow import keras
         from tensorflow.keras import layers # pylint: disable=import-error
         self.model = keras.Sequential([
-            keras.Input(shape=self.input_shape),
+            keras.Input(shape=(28,28,1)),
             layers.Conv2D(32, kernel_size=(3, 3), 
                           activation="relu"),
             layers.MaxPooling2D(pool_size=(2, 2)),
@@ -39,7 +38,7 @@ class NeuralNetFlow(FlowSpec):
             layers.MaxPooling2D(pool_size=(2, 2)),
             layers.Flatten(),
             layers.Dropout(0.5),
-            layers.Dense(self.num_classes, activation="softmax"),
+            layers.Dense(self.num_classes, activation="softmax")
         ])
         self.model.compile(loss="categorical_crossentropy",
                            optimizer="adam", metrics=["accuracy"])
@@ -50,9 +49,11 @@ class NeuralNetFlow(FlowSpec):
         import tempfile
         import tensorflow as tf
         self.batch_size = 128
-        self.model.fit(self.x_train, self.y_train, 
-                  batch_size=self.batch_size, 
-                  epochs=self.epochs, validation_split=0.1)
+        self.model.fit(
+            self.x_train, self.y_train,
+            batch_size=self.batch_size,
+            epochs=self.epochs, validation_split=0.1
+        )
         self.next(self.end)
 
     @step

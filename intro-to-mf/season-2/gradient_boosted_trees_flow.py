@@ -15,6 +15,7 @@ class GradientBoostedTreesFlow(FlowSpec):
         self.y = self.iris['target']
         self.next(self.train_xgb)
 
+    #highlight-start
     @step
     def train_xgb(self):
         from xgboost import XGBClassifier
@@ -27,6 +28,7 @@ class GradientBoostedTreesFlow(FlowSpec):
         self.scores = cross_val_score(
             self.clf, self.X, self.y, cv=self.k_fold)
         self.next(self.end)
+    #highlight-end
         
     @step
     def end(self):
