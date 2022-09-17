@@ -1,7 +1,7 @@
 Welcome to the Metaflow Tutorials 👋
 ================
 
-This repository contains the code to follow along with the [Metaflow tutorials](https://outerbounds.com/docs/tutorials-welcome/). 
+This repository contains the code to follow along with these [Metaflow tutorials](https://outerbounds.com/docs/tutorials-welcome/):
 - [Introduction to Metaflow](https://outerbounds.com/docs/intro-tutorial-overview/)
 - [Operationalizing Natural Language Processing](https://outerbounds.com/docs/nlp-tutorial-overview/)
 
