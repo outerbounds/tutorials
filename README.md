@@ -2,9 +2,9 @@ Welcome to the Metaflow Tutorials 👋
 ================
 
 This repository contains the code to follow along with these [Metaflow tutorials](https://outerbounds.com/docs/tutorials-welcome/):
-- [Introduction to Metaflow](/docs/intro-tutorial-overview/)
-- [Natural Language Processing](/docs/nlp-tutorial-overview/)
-- [Computer Vision](/docs/cv-tutorial-overview/)
+- [Introduction to Metaflow](https://outerbounds.com/docs/intro-tutorial-overview/)
+- [Natural Language Processing](https://outerbounds.com/docs/nlp-tutorial-overview/)
+- [Computer Vision](https://outerbounds.com/docs/cv-tutorial-overview/)
 
 Metaflow is an open source machine learning infrastructure stack started at [Netflix](https://github.com/Netflix). Outerbounds is a company that maintains Metaflow and repositories like this that aim to help data scientists do their jobs.
 
