@@ -3,7 +3,7 @@ import numpy as np
 
 class SinglePredictionFlow(FlowSpec):
 
-    upstream_flow = 'TuningFlow'
+    upstream_flow = Parameter('flow', default = 'TuningFlow')
     image_location = Parameter('im', default = './mnist_random_img.npy')
 
     @step
@@ -14,10 +14,16 @@ class SinglePredictionFlow(FlowSpec):
         self.model = run.data.best_model 
         with open(self.image_location, 'rb') as f:
             self.image = np.load(f)
-        self.logits = self.model.predict(
-            x = np.array([self.image]))
+        self.logits = self.model.predict(x = np.array([self.image]))
         self.probs = softmax(self.logits).numpy()
-        self.pred = self.probs.argmax()
+        if np.isclose(1, np.sum(self.probs)):
+            self.pred = self.probs.argmax()
+        else:
+            self.fallback_model = "Random Guess"
+            self.pred = np.random.randint(low=0, high=9)
+            print("{}/{} probabilities not adding to 1".format(
+                self.__class__.__name__, current.run_id))
+            print("Returning random fall back prediction")
         self.next(self.end)
 
     @card

@@ -2,6 +2,24 @@
 from tensorflow import keras
 
 class ModelOperations:
+    
+    recall = 0.96
+    precision = 0.96
+    
+    def _keras_metrics(self):
+        keras_metrics = []
+        for _m in self.metrics:
+            if _m == 'precision at recall':
+                keras_metrics.append(
+                    keras.metrics.PrecisionAtRecall(recall=self.recall)
+                )
+            elif _m == 'recall at precision':
+                keras.metrics.append(
+                    keras.metrics.RecallAtPrecision(precision=self.precision)
+                )
+            else:
+                keras_metrics.append(_m)
+        return keras_metrics
 
     def make_baseline(self):
         model = keras.Sequential()
@@ -18,7 +36,7 @@ class ModelOperations:
         model.compile(
             loss=self.loss, 
             optimizer=self.optimizer, 
-            metrics=self.metrics
+            metrics=self._keras_metrics()
         )
         return model
 
@@ -48,7 +66,7 @@ class ModelOperations:
         model.compile(
             loss=self.loss, 
             optimizer=self.optimizer, 
-            metrics=self.metrics
+            metrics=self._keras_metrics()
         )
         return model
 

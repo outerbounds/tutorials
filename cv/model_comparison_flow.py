@@ -10,7 +10,7 @@ class ModelComparisonFlow(FlowSpec, ModelOperations):
     kernel_initializer = 'normal'
     optimizer = 'adam'
     loss = 'categorical_crossentropy'
-    metrics = ['accuracy']
+    metrics = ['accuracy', 'precision at recall']
     hidden_conv_layer_sizes = [32, 64]
     input_shape = (28, 28, 1)
     kernel_size = (3, 3)
@@ -47,7 +47,8 @@ class ModelComparisonFlow(FlowSpec, ModelOperations):
         _x_test = self.x_test.reshape(
             self.x_test.shape[0], self.num_pixels
         ).astype('float32')
-        self.history, self.scores = self.fit_and_score(_x_train, _x_test)
+        self.history, self.scores = self.fit_and_score(
+            _x_train, _x_test)
         self._name = "Baseline FFN"
         self.plots = [
             Image.from_matplotlib(p) for p in
@@ -59,7 +60,10 @@ class ModelComparisonFlow(FlowSpec, ModelOperations):
     def cnn(self):
         from neural_net_utils import plot_learning_curves
         self.model = self.make_cnn()
-        self.history, self.scores = self.fit_and_score(self.x_train, self.x_test)
+        #highlight-start
+        self.history, self.scores = self.fit_and_score(
+            self.x_train, self.x_test)
+        #highlight-end
         self._name = "CNN"
         self.plots = [
             Image.from_matplotlib(p) for p in
@@ -67,26 +71,32 @@ class ModelComparisonFlow(FlowSpec, ModelOperations):
         ]
         self.next(self.gather_scores)
 
-    #highlight-start
+    
     @card
     @step
     def gather_scores(self, models):
         import pandas as pd
-        results = {'model': [], 'test accuracy': [], 'test loss': []}
+        results = {
+            'model': [], 'test loss': [],
+            **{metric: [] for metric in self.metrics}
+        }
         max_seen_acc = 0
         rows = []
         for model in models:
+            #highlight-start
             results['model'].append(model._name)
             results['test loss'].append(model.scores[0])
-            results['test accuracy'].append(model.scores[1])
+            for i, metric in enumerate(self.metrics):
+                results[metric].append(model.scores[i+1])
+            #highlight-end
             rows.append(model.plots)
             if model.scores[1] > max_seen_acc:
                 self.best_model = model.model
                 max_seen_acc = model.scores[1]
+        #highlight-next-line
         current.card.append(Table(rows))
         self.results = pd.DataFrame(results)
         self.next(self.end)
-    #highlight-end
 
     @step
     def end(self):
