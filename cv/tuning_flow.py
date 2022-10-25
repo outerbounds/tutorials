@@ -94,9 +94,9 @@ class TuningFlow(FlowSpec, ModelOperations):
                     ]
                 ])
             )
-            # simple rule for determining best model
-            # in production flows you need to think carefully
-                # about how this connects to your objectives.
+            # A simple rule for determining the best model.
+            # In production flows you need to think carefully
+                # about how this kind of rule maps to your objectives.
             if model.scores[1] > max_seen_acc:
                 self.best_model = model.model
                 max_seen_acc = model.scores[1]

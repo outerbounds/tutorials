@@ -2,7 +2,7 @@
 from metaflow import FlowSpec, step, Flow, current
 
 class BaselineNLPFlow(FlowSpec):
-        
+
     @step
     def start(self):
         "Read the data"
@@ -22,14 +22,13 @@ class BaselineNLPFlow(FlowSpec):
         self.base_rocauc = roc_auc_score(
             self.valdf.labels, baseline_predictions)
         self.next(self.end)
-        
+
     @step
     def end(self):
         msg = 'Baseline Accuracy: {}\nBaseline AUC: {}'
         print(msg.format(
             round(self.base_acc,3), round(self.base_rocauc,3)
         ))
-        
 
 if __name__ == '__main__':
     BaselineNLPFlow()

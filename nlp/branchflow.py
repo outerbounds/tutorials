@@ -17,8 +17,10 @@ class BranchNLPFlow(FlowSpec):
         "Compute the baseline"
         from sklearn.metrics import accuracy_score, roc_auc_score
         baseline_predictions = [1] * self.valdf.shape[0]
-        self.base_acc = accuracy_score(self.valdf.labels, baseline_predictions)
-        self.base_rocauc = roc_auc_score(self.valdf.labels, baseline_predictions)
+        self.base_acc = accuracy_score(
+            self.valdf.labels, baseline_predictions)
+        self.base_rocauc = roc_auc_score(
+            self.valdf.labels, baseline_predictions)
         self.next(self.join)
 
     @step
@@ -42,8 +44,10 @@ class BranchNLPFlow(FlowSpec):
         self.base_acc = inputs.baseline.base_acc
         model = NbowModel.from_dict(self.model_dict)
         
-        self.model_acc = model.eval_acc(X=self.val_df['review'], labels=self.val_df['labels'])
-        self.model_rocauc = model.eval_rocauc(X=self.val_df['review'], labels=self.val_df['labels'])
+        self.model_acc = model.eval_acc(
+            X=self.val_df['review'], labels=self.val_df['labels'])
+        self.model_rocauc = model.eval_rocauc(
+            X=self.val_df['review'], labels=self.val_df['labels'])
         
         print(f'Baseline Acccuracy: {self.base_acc:.2%}')
         print(f'Baseline AUC: {self.base_rocauc:.2}')
