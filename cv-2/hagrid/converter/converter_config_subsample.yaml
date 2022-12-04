@@ -1,0 +1,24 @@
+dataset:
+  dataset_annotations: data/subsample-annotations # Path to annotations
+  dataset_folder: data # Path to images
+  phases: [subsample] #names of annotation directories
+  targets:
+    - call
+    - dislike
+    - fist
+    - four
+    - like
+    - mute
+    - ok
+    - one
+    - palm
+    - peace_inverted
+    - peace
+    - rock
+    - stop_inverted
+    - stop
+    - three
+    - three2
+    - two_up
+    - two_up_inverted
+    - no_gesture
