@@ -80,7 +80,7 @@ class TrainHandGestureClassifier(FlowSpec):
                 result = s3.get(path)
                 with zipfile.ZipFile(result.path, 'r') as zip_ref:
                     zip_ref.extractall(path.split('.zip')[0])
-            else: # Full dataset is not yet available.
+            else: # Full dataset takes too long for the purpose of this tutorial.
                 raise NotImplementedError()
 
     # 🚨🚨🚨 Do you want to ▶️ on ☁️☁️☁️?
