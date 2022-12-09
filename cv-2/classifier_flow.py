@@ -67,7 +67,7 @@ class TrainHandGestureClassifier(FlowSpec):
             # 3: Storing metrics/logs with Tensorboard. 
         import os
         print("Training {} in flow {}".format(self.MODEL_NAME, current.flow_name))
-        self.datastore = metaflow_config.METAFLOW_CONFIG['METAFLOW_DATASTORE_SYSROOT_S3']
+        self.datastore = '' #metaflow_config.DATASTORE_SYSROOT_GS
         self.experiment_storage_prefix = os.path.join(self.datastore, current.flow_name, current.run_id)
         self.next(self.train)
 
@@ -86,12 +86,12 @@ class TrainHandGestureClassifier(FlowSpec):
     # 🚨🚨🚨 Do you want to ▶️ on ☁️☁️☁️?
     # You need to be configured with a Metaflow AWS deployment to use this decorator.
     # If you want to run locally, you can comment the `@batch` decorator out.
-    @batch(
-        gpu=1,
-        memory=32000,
-        image='eddieob/cv-tutorial:gpu-latest',
-        shared_memory=8000,
-    )
+    # @batch(
+    #     gpu=1,
+    #     memory=32000,
+    #     image='eddieob/cv-tutorial:gpu-latest',
+    #     shared_memory=8000,
+    # )
     @step
     def train(self):
         from hagrid.classifier.run import run_train
@@ -99,14 +99,14 @@ class TrainHandGestureClassifier(FlowSpec):
         import os
         
         # Download the dataset onto the compute instance.
-        if not os.path.exists(self.DATA_ROOT):
-            os.mkdir(self.DATA_ROOT)
-        print("Downloading images...")
-        self._download_data_from_s3(self.IMAGES, sample=True)
-        print("Done!")
-        print("Downloading annotations...")
-        self._download_data_from_s3(self.ANNOTATIONS, sample=True)
-        print("Done!")
+        # if not os.path.exists(self.DATA_ROOT):
+        #     os.mkdir(self.DATA_ROOT)
+        # print("Downloading images...")
+        # self._download_data_from_s3(self.IMAGES, sample=True)
+        # print("Done!")
+        # print("Downloading annotations...")
+        # self._download_data_from_s3(self.ANNOTATIONS, sample=True)
+        # print("Done!")
 
         # Train a model from available MODEL_NAME options from a checkpoint.
         # There will be errors that happen if CHECKPOINT_PATH doesn't match MODEL_NAME.
